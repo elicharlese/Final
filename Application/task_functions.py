@@ -1,0 +1,16 @@
+from task_system import *
+
+def print_main_menu(menu):
+    """
+    Given a dictionary with the menu,
+    prints the keys and values as the
+    formatted options.
+    Adds additional prints for decoration
+    and outputs a question
+    "What would you like to do?"
+    """
+    print("==========================")
+    print("What would you like to do?")
+    for key, value in menu.items():
+        print(f"{key} - {value}")
+    print("==========================")
