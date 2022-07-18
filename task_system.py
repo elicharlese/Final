@@ -10,6 +10,30 @@ the_menu = {
     "Q" : "Quit this program"
 }
 
+all_tasks = [
+    {
+        "name": "Call XYZ",
+        "info": "",
+        "priority": 3,
+        "duedate": '05/28/2022',
+        "done": 'yes'
+    },
+    {
+        "name": "Finish checkpoint 1 for CSW8",
+        "info": "Submit to Gradescope",
+        "priority": 5,
+        "duedate": '06/02/2022',
+        "done": 'no'
+    },
+    {
+        "name": "Finish checkpoint 2 for CSW8",
+        "info": "Implement the new functions",
+        "priority": 5,
+        "duedate": '06/05/2022',
+        "done": 'no'
+    }
+]
+
 opt = None
 
 while True:

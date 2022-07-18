@@ -16,7 +16,7 @@ def print_main_menu(menu):
         print(f"{key} - {value}")
     print("==========================")
 
-def get_written_date(date_input):
+def get_written_date(date_input): #TODO: Add function from labs
     """
     Returns the date in the format:
     YYYY-MM-DD
