@@ -13,7 +13,7 @@ the_menu = {
 opt = None
 
 while True:
-    # print_main_menu(the_menu) # TODO 2: define the function, uncomment, and call with the menu as an argument
+    print_main_menu(the_menu) # TODO 2: define the function, uncomment, and call with the menu as an argument
     opt = input("::: Enter a menu option\n> ")
     opt = opt.upper() # to allow us to input lower- or upper-case letters
     if opt not in the_menu: # TODO 3: check of the character stored in opt is in the_menu dictionary

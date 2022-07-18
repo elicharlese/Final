@@ -1,3 +1,4 @@
+import datetime
 from task_system import *
 
 def print_main_menu(menu):
@@ -14,3 +15,11 @@ def print_main_menu(menu):
     for key, value in menu.items():
         print(f"{key} - {value}")
     print("==========================")
+
+def get_written_date(date_input):
+    """
+    Returns the date in the format:
+    YYYY-MM-DD
+    """
+    date_input = date_input.split("-")
+    return datetime.now().strftime("%Y-%m-%d")
