@@ -34,10 +34,24 @@ all_tasks = [
     }
 ]
 
+list_menu = {
+    "A": "all tasks",
+    "C": "completed tasks",
+    "I": "incomplete tasks"
+}
+
+priority_scale = {
+    1: "Lowest",
+    2: "Low",
+    3: "Medium",
+    4: "High",
+    5: "Highest"
+}
+
 opt = None
 
 while True:
-    print_main_menu(the_menu) # TODO 2: define the function, uncomment, and call with the menu as an argument
+    print_main_menu(the_menu)
     opt = input("::: Enter a menu option\n> ")
     opt = opt.upper() # to allow us to input lower- or upper-case letters
     if opt not in the_menu: # TODO 3: check of the character stored in opt is in the_menu dictionary
@@ -47,8 +61,22 @@ while True:
     if opt == 'q': # TODO 4: quit the program
         print("Goodbye!\n")
         break # exit the main `while` loop
-    # Pause before going back to the main menu
+    elif opt == 'L':
+        if all_tasks == []:
+            print("WARNING: There is nothing to display!")
+            # Pause before going back to the main menu
+            input("::: Press Enter to continue")
+            continue
+        subopt = get_selection(the_menu[opt], list_menu)
+        if subopt == 'A':
+            print_tasks(all_tasks, priority_scale)
+        elif subopt == 'C':
+            print_tasks(all_tasks, priority_scale, completed = 'yes')
+        elif subopt == 'I':
+            print_tasks(all_tasks, priority_scale, completed = 'no')
+        # Pause before going back to the main menu
     input("::: Press Enter to continue")
+    continue
 
 print("Have a nice day!")
 # Back to top
