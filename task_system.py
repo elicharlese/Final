@@ -68,13 +68,13 @@ while True:
             input("::: Press Enter to continue")
             continue
         subopt = get_selection(the_menu[opt], list_menu)
-        if subopt == 'A':
-            print_tasks(all_tasks, priority_scale)
-        elif subopt == 'C':
-            print_tasks(all_tasks, priority_scale, completed = 'yes')
-        elif subopt == 'I':
-            print_tasks(all_tasks, priority_scale, completed = 'no')
-        # Pause before going back to the main menu
+        # if subopt == 'A':
+        #     print_tasks(all_tasks, priority_scale)
+        # elif subopt == 'C':
+        #     print_tasks(all_tasks, priority_scale, completed = 'yes')
+        # elif subopt == 'I':
+        #     print_tasks(all_tasks, priority_scale, completed = 'no')
+        # # Pause before going back to the main menu
     input("::: Press Enter to continue")
     continue
 
