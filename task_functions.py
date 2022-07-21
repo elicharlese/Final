@@ -86,9 +86,11 @@ def get_selection(action, suboptions, to_upper=True, go_back=False): # TODO:: Fi
                 The selection be a valid key in the suboptions
                 or a letter M, if go_back is True.
         """
+        print(f"You selected option {action} to > {suboptions[action]}.")
+        print("What would you like to list? ")
         for key, value in suboptions.items():
                 print(f"{key} - {value}")
-        selection = input("What would you like to do? ").upper()
+        selection = input(":::: Enter your selection").upper()
         if go_back == False:
                 if 'm' in suboptions or 'M' in suboptions:
                         print("Invalid submenu, which contains M as a key.")
