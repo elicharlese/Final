@@ -18,20 +18,20 @@ result = get_selection(arg1, arg2)
 expected_result = 'List'
 print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
 assert result == expected_result
-# # Test action = 'A'
-# arg1 = 'A'
-# arg2 = suboptions
-# result = get_selection(arg1, arg2)
-# expected_result = selection
-# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
-# assert result == expected_result
-# # Test action = 'C'
-# arg1 = 'C'
-# arg2 = suboptions
-# result = get_selection(arg1, arg2)
-# expected_result = selection
-# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
-# assert result == expected_result
+# Test action = 'A'
+arg1 = 'A'
+arg2 = list_menu
+result = get_selection(arg1, arg2)
+expected_result = 'A'
+print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+assert result == expected_result
+# Test action = 'C'
+arg1 = 'C'
+arg2 = list_menu
+result = get_selection(arg1, arg2)
+expected_result = 'C'
+print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+assert result == expected_result
 
 
 # ### Test all-cases for the print_task(task, priority_map, name_only=False) function ###

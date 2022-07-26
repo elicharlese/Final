@@ -1,3 +1,6 @@
+from task_functions import *
+from task_system import *
+
 list_menu = {
         "A": "all tasks",
         "C": "completed tasks",

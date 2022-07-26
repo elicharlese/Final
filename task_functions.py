@@ -181,14 +181,14 @@ def print_tasks(task_list, priority_map, name_only=False,
         Helper functions:
         - print_task() to print individual tasks
         """
-        print("-"*42)
-        for task in task_list: # go through all tasks in the list
-                if show_idx: # if the index of the task needs to be displayed
-                        print(f"{...}.", end=" ")
-                if completed == "all":
-                        print_task(task, priority_map, name_only)
-                elif ... == completed:
-                        print_task(task, priority_map, name_only)
+        # print("-"*42)
+        # for task in task_list: # go through all tasks in the list
+        #         if show_idx: # if the index of the task needs to be displayed
+        #                 print(f"{task}.", end=" ")
+        #         if completed == "all":
+        #                 print_task(task, priority_map, name_only)
+        #         elif ... == completed:
+        #                 print_task(task, priority_map, name_only)
 
 def get_new_task(task_list, priority_map, name_only=False,
                 show_idx=False, start_idx=0, completed="all"):
