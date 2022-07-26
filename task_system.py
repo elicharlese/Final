@@ -1,6 +1,9 @@
 from task_functions import *
 
-the_menu = {
+opt = None
+
+while True:
+    the_menu = {
     "L" : "List",
     "A" : "Add",
     "U" : "Update",
@@ -8,49 +11,77 @@ the_menu = {
     "S" : "Save the data to file",
     "R" : "Restore data from file",
     "Q" : "Quit this program"
-}
-
-all_tasks = [
-    {
+    }
+    all_tasks = [
+        {
+            "name": "Call XYZ",
+            "info": "",
+            "priority": 3,
+            "duedate": '05/28/2022',
+            "done": 'yes'
+        },
+        {
+            "name": "Finish checkpoint 1 for CSW8",
+            "info": "Submit to Gradescope",
+            "priority": 5,
+            "duedate": '06/02/2022',
+            "done": 'no'
+        },
+        {
+            "name": "Finish checkpoint 2 for CSW8",
+            "info": "Implement the new functions",
+            "priority": 5,
+            "duedate": '06/05/2022',
+            "done": 'no'
+        }
+    ]
+    list_menu = {
+        "A": "all tasks",
+        "C": "completed tasks",
+        "I": "incomplete tasks"
+    }
+    priority_scale = {
+        1: "Lowest",
+        2: "Low",
+        3: "Medium",
+        4: "High",
+        5: "Highest"
+    }
+    all_tasks = [
+        {
         "name": "Call XYZ",
         "info": "",
         "priority": 3,
         "duedate": '05/28/2022',
         "done": 'yes'
-    },
-    {
+        },
+        {
         "name": "Finish checkpoint 1 for CSW8",
         "info": "Submit to Gradescope",
         "priority": 5,
         "duedate": '06/02/2022',
         "done": 'no'
-    },
-    {
+        },
+        {
         "name": "Finish checkpoint 2 for CSW8",
         "info": "Implement the new functions",
         "priority": 5,
         "duedate": '06/05/2022',
         "done": 'no'
+        }
+    ]
+    list_menu = {
+        "A": "all tasks",
+        "C": "completed tasks",
+        "I": "incomplete tasks"
     }
-]
-
-list_menu = {
-    "A": "all tasks",
-    "C": "completed tasks",
-    "I": "incomplete tasks"
-}
-
-priority_scale = {
-    1: "Lowest",
-    2: "Low",
-    3: "Medium",
-    4: "High",
-    5: "Highest"
-}
-
-opt = None
-
-while True:
+    priority_scale = {
+        1: "Lowest",
+        2: "Low",
+        3: "Medium",
+        4: "High",
+        5: "Highest"
+    }
     print_main_menu(the_menu)
     opt = input("::: Enter a menu option\n> ")
     opt = opt.upper() # to allow us to input lower- or upper-case letters
@@ -92,7 +123,6 @@ while True:
     #             print(f"You provided {result}, instead of the expected 5.\n")
     #         else:
     #             print(f"WARNING: invalid task field: {result}\n")
-
     #         print("::: Would you like to add another task?", end=" ")
     #         continue_action = input("Enter 'y' to continue.\n> ")
     #         continue_action = continue_action.lower()
@@ -123,7 +153,6 @@ while True:
     #                 print(f"The task was not updated.")
     #         else: # is_valid_index() returned False
     #             print(f"WARNING: |{...}| is an invalid task number!")  # TODO
-
     #         print("::: Would you like to update another task?", end=" ")
     #         continue_action = input("Enter 'y' to continue.\n> ")
     #         continue_action = continue_action.lower()

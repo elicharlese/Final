@@ -1,43 +1,3 @@
-import datetime
-
-all_tasks = [
-        {
-        "name": "Call XYZ",
-        "info": "",
-        "priority": 3,
-        "duedate": '05/28/2022',
-        "done": 'yes'
-        },
-        {
-        "name": "Finish checkpoint 1 for CSW8",
-        "info": "Submit to Gradescope",
-        "priority": 5,
-        "duedate": '06/02/2022',
-        "done": 'no'
-        },
-        {
-        "name": "Finish checkpoint 2 for CSW8",
-        "info": "Implement the new functions",
-        "priority": 5,
-        "duedate": '06/05/2022',
-        "done": 'no'
-        }
-]
-
-list_menu = {
-        "A": "all tasks",
-        "C": "completed tasks",
-        "I": "incomplete tasks"
-        }
-
-priority_scale = {
-        1: "Lowest",
-        2: "Low",
-        3: "Medium",
-        4: "High",
-        5: "Highest"
-}
-
 def print_main_menu(menu):
         """
         Given a dictionary with the menu,
@@ -78,10 +38,6 @@ def get_selection(action, suboptions, to_upper=True, go_back=False): # TODO:: Fi
                 The selection be a valid key in the suboptions
                 or a letter M, if go_back is True.
         """
-        # print("::: What would you like to list? ")
-        # for key, value in suboptions.items():
-        #         print(f"{key} - {value}")
-        # selection = input(":::: Enter your selection\n> ").upper()
         selection = None
         if go_back == False:
                 if 'm' in suboptions or 'M' in suboptions:
@@ -106,10 +62,59 @@ def get_selection(action, suboptions, to_upper=True, go_back=False): # TODO:: Fi
                 else:
                         print(f"You selected |{selection}| to",
                                 f"{action.lower()} |{suboptions[selection]}|.")
-        return selection
+        return selection #FIXME:: This function is not being used
 
+is_valid_month = {
+        "01": "January",
+        "02": "February",
+        "03": "March",
+        "04": "April",
+        "05": "May",
+        "06": "June",
+        "07": "July",
+        "08": "August",
+        "09": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+        }
 
-def print_task(task, priority_map, name_only=False): # TODO:: Fix the call from the main system
+is_valid_day = {
+        "01": "Sunday",
+        "02": "Monday",
+        "03": "Tuesday",
+        "04": "Wednesday",
+        "05": "Thursday",
+        "06": "Friday",
+        "07": "Saturday",
+        "08": "Sunday"
+}
+
+is_valid_year = {
+        "2010": "2010",
+        "2011": "2011",
+        "2012": "2012",
+        "2013": "2013",
+        "2014": "2014",
+        "2015": "2015",
+        "2016": "2016",
+        "2017": "2017",
+        "2018": "2018",
+        "2019": "2019",
+        "2020": "2020",
+        "2021": "2021",
+        "2022": "2022"
+}
+
+def get_written_date(date_input):
+        """
+        Returns the date in the format:
+        YYYY-MM-DD
+        """
+        # date_input = date_input.split("-")
+        # return datetime.now().strftime("%Y-%m-%d")
+
+def print_task(task, priority_map, name_only=False): # TODO:: datetime is not being used
         """
         param: task (dict) - a dictionary object that is expected
                 to have the following string keys:
@@ -135,13 +140,6 @@ def print_task(task, priority_map, name_only=False): # TODO:: Fix the call from 
         Helper functions:
         - get_written_date() to display the 'duedate' field
         """
-        def get_written_date(date_input):
-                """
-                Returns the date in the format:
-                YYYY-MM-DD
-                """
-                date_input = date_input.split("-")
-                return datetime.now().strftime("%Y-%m-%d")
         if name_only:
                 print(f"{task['name']}")
         else:
@@ -154,7 +152,7 @@ def print_task(task, priority_map, name_only=False): # TODO:: Fix the call from 
 
 
 def print_tasks(task_list, priority_map, name_only=False,
-                show_idx=False, start_idx=0, completed="all"): # TODO:: Fix the call from the main system
+                show_idx=False, start_idx=0, completed="all"): # FIXME: Implies missing string that needs to be added
         """
         param: task_list (list) - a list containing dictionaries with
                 the task data
@@ -195,7 +193,7 @@ def print_tasks(task_list, priority_map, name_only=False,
         #         print_task(task, priority_map, name_only)
 
 def get_new_task(task_list, priority_map, name_only=False,
-                show_idx=False, start_idx=0, completed="all"): # TODO:: Fix the call from the main system
+                show_idx=False, start_idx=0, completed="all"): # FIXME: Returns None
         """
         param: task_list (list) - a list containing dictionaries with
                 the task data
@@ -274,7 +272,7 @@ def is_valid_completion(completion):
         # else:
         #         return False
 
-def is_valid_index(idx, in_list, start_idx = 0):
+def is_valid_index(idx, in_list, start_idx = 0): # FIXME: Returns None
         """
         param: idx (str) - a string that is expected to
                 contain an integer index to validate
@@ -294,12 +292,12 @@ def is_valid_index(idx, in_list, start_idx = 0):
         integer value, if int(idx) is < start_idx,
         or if it exceeds the size of in_list.
         """
-        # if not idx.isdigit():
-        #         return False
-        # else:
-        #         return idx >= start_idx
+        if not idx.isdigit():
+                return False
+        else:
+                return idx >= start_idx
 
-def update_task(info_list, idx, priority_map, field_key, field_info, start_idx = 0):
+def update_task(info_list, idx, priority_map, field_key, field_info, start_idx = 0): #FIXME: Returns None
         """
         param: info_list - a list that contains task dictionaries
         param: idx (str) - a string that is expected to contain an integer
@@ -340,7 +338,7 @@ def update_task(info_list, idx, priority_map, field_key, field_info, start_idx =
         - is_valid_completion()
         """
 
-def delete_item(in_list, idx, start_idx = 0):
+def delete_item(in_list, idx, start_idx = 0): # FIXME: Returns None
         """
         param: in_list - a list from which to remove an item
         param: idx (str) - a string that is expected to
@@ -395,9 +393,10 @@ def load_tasks_from_csv(filename, in_list, priority_map):
         `filename` in "read" mode. For each row in the csv file, the function will
         proceed to create a new task using the `get_new_task()` function.
         - If the function `get_new_task()` returns a valid task object,
-        it gets appended to the end of the `in_list`.
+                it gets appended to the end of the `in_list`.
         - If the `get_new_task()` function returns an error, the 1-based
-        row index gets recorded and added to the NEW list that is returned.
+                row index gets recorded and added to the NEW list that is returned.
+
         E.g., if the file has a single row, and that row has invalid task data,
         the function would return [1] to indicate that the first row caused an
         error; in this case, the `in_list` would not be modified.
