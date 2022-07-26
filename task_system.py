@@ -35,18 +35,6 @@ while True:
             "done": 'no'
         }
     ]
-    list_menu = {
-        "A": "all tasks",
-        "C": "completed tasks",
-        "I": "incomplete tasks"
-    }
-    priority_scale = {
-        1: "Lowest",
-        2: "Low",
-        3: "Medium",
-        4: "High",
-        5: "Highest"
-    }
     all_tasks = [
         {
         "name": "Call XYZ",
@@ -85,14 +73,14 @@ while True:
     print_main_menu(the_menu)
     opt = input("::: Enter a menu option\n> ")
     opt = opt.upper() # to allow us to input lower- or upper-case letters
-    if opt not in the_menu: # TODO 3: check of the character stored in opt is in the_menu dictionary
+    if opt not in the_menu:
         print(f"WARNING: {opt} is an invalid menu option.\n")
         continue
     print(f"You selected option {opt} to > {the_menu[opt]}.")
-    if opt == 'q' or opt == 'Q': # TODO 4: quit the program
+    if opt == 'q' or opt == 'Q':
         print("Goodbye!\n")
         break # exit the main `while` loop
-    elif opt == 'l' or opt == 'L':
+    elif opt == 'L':
         if all_tasks == []:
             print("WARNING: There is nothing to display!")
             # Pause before going back to the main menu
@@ -106,7 +94,7 @@ while True:
         elif subopt == 'I':
             print_tasks(all_tasks, priority_scale, completed = 'no')
         # Pause before going back to the main menu
-    # elif opt == 'a' or opt == 'A':
+    # elif opt == 'A':
     #     continue_action = 'y'
     #     while continue_action == 'y':
     #         print("::: Enter each required field, separated by commas.")
@@ -127,17 +115,17 @@ while True:
     #         continue_action = input("Enter 'y' to continue.\n> ")
     #         continue_action = continue_action.lower()
     # ----------------------------------------------------------------
-    # elif opt == 'u' or opt == 'U':
+    # elif opt == 'U':
     #     continue_action = 'y'
     #     while continue_action == 'y':
-    #         if ... == []: # TODO
+    #         if ... == []: # TODO: check if there are any tasks to update
     #             print("WARNING: There is nothing to update!")
     #             break
     #         print("::: Which task would you like to update?")
     #         print_tasks(all_tasks, priority_scale, name_only = True, show_idx = True, start_idx = 1)
     #         print("::: Enter the number corresponding to the task.")
     #         user_option = input("> ")
-    #         if ...: # TODO
+    #         if ...: # TODO: check if there are any tasks to update
     #             ... # TODO: convert the index appropriately to account for the start_idx = 1
     #             subopt = get_selection("update", all_tasks[...], to_upper = False, go_back = True)
     #             if subopt == 'M': # if the user changed their mind
@@ -157,7 +145,7 @@ while True:
     #         continue_action = input("Enter 'y' to continue.\n> ")
     #         continue_action = continue_action.lower()
     # ----------------------------------------------------------------
-    # elif opt == 's' or opt == 'S':
+    # elif opt == 'S':
     #     continue_action = ...
     #     while continue_action == 'y':
     #         print("::: Enter the filename ending with '.csv'.")
