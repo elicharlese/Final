@@ -110,7 +110,7 @@ def get_written_date(date_input):
         YYYY-MM-DD
         """
         month, day, year = date_input.split("/")
-        return f"{year}-{month}-{day}"
+        return f"{month} {day}, {year}"
 
 def print_task(task, priority_map, name_only=False):
         """
@@ -140,13 +140,17 @@ def print_task(task, priority_map, name_only=False):
         """
         if name_only:
                 print(f"{task['name']}")
+        elif task['info'] != "":
+                print(f"{task['name']}")
+                print(f"* {task['info']}")
+                print(f"* Due: {get_written_date(task['duedate'])}", end=' ')
+                print(f"(Priority: {priority_map[task['priority']]})")
+                print(f"* Completed? {task['done']}")
         else:
                 print(f"{task['name']}")
-                print(f"Priority: {priority_map[task['priority']]}")
-                print(f"Due date: {get_written_date(task['duedate'])}")
-                print(f"Done: {task['done']}")
-                print(f"Info: {task['info']}")
-                print("==========================")
+                print(f"* Due: {get_written_date(task['duedate'])}", end=' ')
+                print(f"(Priority: {priority_map[task['priority']]})")
+                print(f"* Completed? {task['done']}")
 
 
 def print_tasks(task_list, priority_map, name_only=False,
@@ -188,9 +192,9 @@ def print_tasks(task_list, priority_map, name_only=False,
                 if completed == 'all': # if all tasks need to be displayed
                         print_task(task, priority_map, name_only)
                 elif completed == 'yes':
-                        print_task(task, priority_map, name_only, completed='yes')
+                        print_task(task, priority_map, name_only)
                 else:
-                        print_task(task, priority_map, name_only, completed='no')
+                        print_task(task, priority_map, name_only)
 
 def get_new_task(task_list, priority_map, name_only=False,
                 show_idx=False, start_idx=0, completed="all"):
@@ -367,14 +371,14 @@ def delete_item(in_list, idx, start_idx = 0):
         Helper functions:
         - is_valid_index()
         """
-        # if not in_list:
-        #         return 0
-        # elif not isinstance(idx, str) or not isinstance(start_idx, int):
-        #         return None
-        # elif not is_valid_index(idx, in_list, start_idx):
-        #         return -1
-        # else:
-        #         return in_list.pop(int(idx) - start_idx)
+        if not in_list:
+                return 0
+        elif not isinstance(idx, str) or not isinstance(start_idx, int):
+                return None
+        elif not is_valid_index(idx, in_list, start_idx):
+                return -1
+        else:
+                return in_list.pop(int(idx) - start_idx)
 
 def load_tasks_from_csv(filename, in_list, priority_map):
         """
