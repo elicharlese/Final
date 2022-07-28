@@ -176,12 +176,12 @@ def print_task(task, priority_map, name_only=False):
                 print(f"{task['name']}")
                 print(f"* {task['info']}")
                 print(f"* Due: {get_written_date(task['duedate'])}", end=' ')
-                print(f"(Priority: {priority_map[task['priority']]})")
+                print(f" (Priority: {priority_map[task['priority']]})")
                 print(f"* Completed? {task['done']}")
         else:
                 print(f"{task['name']}")
                 print(f"* Due: {get_written_date(task['duedate'])}", end=' ')
-                print(f"(Priority: {priority_map[task['priority']]})")
+                print(f" (Priority: {priority_map[task['priority']]})")
                 print(f"* Completed? {task['done']}")
 
 
@@ -260,53 +260,55 @@ def get_new_task(task_list, priority_map, name_only=False,
         Helper functions:
         - print_task() to print individual tasks
         """
-        # print("-"*42)
-        # for key in suboptions:  # go through all tasks in the list
-        # if show_idx:  # if the index of the task needs to be displayed
-        #         print(f"{...}.", end=" ")
-        # if completed == "all":
-        #         print_task(task, priority_map, name_only)
-        # elif subopt == completed:
-        #         print_task(task, priority_map, name_only)
+        print("-"*42)
+        for task in task_list:  # go through all tasks in the list
+                if show_idx:  # if the index of the task needs to be displayed
+                        print(f"{...}.", end=" ")
+                if completed == "all":
+                        print_task(task, priority_map, name_only)
+                elif completed == "yes":
+                        print_task(task, priority_map, name_only)
+                else:
+                        print_task(task, priority_map, name_only)
 
 def is_valid_name(name):
         """
         param: name (str) - a string containing the task's name
         returns: True if the name is not empty, False otherwise
         """
-        # if name != "":
-        #         return True
-        # else:
-        #         return False
+        if name != "":
+                return True
+        else:
+                return False
 def  is_valid_priority(priority):
         """
         param: priority (int) - an integer representing the task's priority
         returns: True if the priority is between 1 and 5, False otherwise
         """
-        # if priority in range(1, 6):
-        #         return True
-        # else:
-        #         return False
+        if priority in range(1, 6):
+                return True
+        else:
+                return False
 
 def is_valid_date(date):
         """
         param: date (str) - a string containing the task's due date
         returns: True if the date is in the format YYYY-MM-DD, False otherwise
         """
-        # if date.split("-")[0].isdigit() and date.split("-")[1].isdigit() and date.split("-")[2].isdigit():
-        #         return True
-        # else:
-        #         return False
+        if date.split("-")[0].isdigit() and date.split("-")[1].isdigit() and date.split("-")[2].isdigit():
+                return True
+        else:
+                return False
 
 def is_valid_completion(completion):
         """
         param: completion (str) - a string containing the task's completion status
         returns: True if the completion status is either "done" or "not done", False otherwise
         """
-        # if completion == "done" or completion == "not done":
-        #         return True
-        # else:
-        #         return False
+        if completion == "done" or completion == "not done":
+                return True
+        else:
+                return False
 
 def is_valid_index(idx, in_list, start_idx = 0):
         """

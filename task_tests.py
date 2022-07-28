@@ -3,21 +3,21 @@ from task_system import *
 
 # Assert statements (0.0/14.0)
 
-# ### Test all-cases for the print_main_menu(menu) function ###
-# arg1 = the_menu
-# result = print_main_menu(arg1)
-# expected_result = None
-# print(f"--> print_main_menu({arg1}) returned `{result}`\n")
-# assert result == expected_result
+### Test all-cases for the print_main_menu(menu) function ###
+arg1 = the_menu
+result = print_main_menu(arg1)
+expected_result = None
+print(f"--> print_main_menu({arg1}) returned `{result}`\n")
+assert result == expected_result
 
-# ### Test all-cases for the get_selection(action, suboptions, to_upper=True, go_back=False) function ###
-# # Test action = 'L'
-# arg1 = 'L'
-# arg2 = list_menu
-# result = get_selection(arg1, arg2)
-# expected_result = 'List'
-# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
-# assert result == expected_result
+### Test all-cases for the get_selection(action, suboptions, to_upper=True, go_back=False) function ###
+# Test action = 'L'
+arg1 = 'L'
+arg2 = list_menu
+result = get_selection(arg1, arg2)
+expected_result = 'List'
+print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+assert result == expected_result
 # # Test action = 'A'
 # arg1 = 'A'
 # arg2 = list_menu
@@ -97,15 +97,44 @@ from task_system import *
 # expected_result = None
 # print(f"--> print_task({arg1, arg2}) returned `{result}`\n")
 # assert result == expected_result
+# # Test name_only = True
+# arg1 = task
+# arg2 = priority_map
+# result = print_task(arg1, arg2)
+# expected_result = None
+# print(f"--> print_task({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
 
 # ### Test all-cases for the get_written_date(date_input) function ###
-# arg1 = date_input
+# # Test with a date_input that is stringified as a date
+# arg1 = '01/01/2020'
+# result = get_written_date(arg1)
+# expected_result = None
+# print(f"--> get_written_date({arg1}) returned `{result}`\n")
+# assert result == expected_result
+# # Test with a date_input that is a list of strings
+# arg1 = ['01', '01', '2020']
 # result = get_written_date(arg1)
 # expected_result = None
 # print(f"--> get_written_date({arg1}) returned `{result}`\n")
 # assert result == expected_result
 
 # ### Test all-cases for the print_tasks(task_list, priority_map, name_only=False, show_idx=False, start_idx=0, completed="all") function ###
+# # Test for all tasks
+# arg1 = task_list
+# arg2 = priority_map
+# result = print_tasks(arg1, arg2)
+# expected_result = 'You selected option L to > List.'
+# print(f"--> print_tasks({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test for tasks that are completed
+# arg1 = task_list
+# arg2 = priority_map
+# result = print_tasks(arg1, arg2)
+# expected_result = 'You selected option L to > List.'
+# print(f"--> print_tasks({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test for tasks that are incomplete
 # arg1 = task_list
 # arg2 = priority_map
 # result = print_tasks(arg1, arg2)
