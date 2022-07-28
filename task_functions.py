@@ -181,14 +181,16 @@ def print_tasks(task_list, priority_map, name_only=False,
         Helper functions:
         - print_task() to print individual tasks
         """
-        # print("-"*42)
-        # for task in task_list: # go through all tasks in the list
-        #         if show_idx: # if the index of the task needs to be displayed
-        #                 print(f"{task}.", end=" ")
-        #         if completed == "all":
-        #                 print_task(task, priority_map, name_only)
-        #         elif ... == completed:
-        #                 print_task(task, priority_map, name_only)
+        print("-"*42)
+        for task in task_list: # go through all tasks in the list
+                if show_idx: # if the index of the task needs to be displayed
+                        print(f"{task}.", end=" ")
+                if completed == 'all': # if all tasks need to be displayed
+                        print_task(task, priority_map, name_only)
+                elif completed == 'yes':
+                        print_task(task, priority_map, name_only, completed='yes')
+                else:
+                        print_task(task, priority_map, name_only, completed='no')
 
 def get_new_task(task_list, priority_map, name_only=False,
                 show_idx=False, start_idx=0, completed="all"):
@@ -270,7 +272,7 @@ def is_valid_completion(completion):
         # else:
         #         return False
 
-def is_valid_index(idx, in_list, start_idx = 0): # FIXME: Returns None
+def is_valid_index(idx, in_list, start_idx = 0):
         """
         param: idx (str) - a string that is expected to
                 contain an integer index to validate
@@ -290,12 +292,14 @@ def is_valid_index(idx, in_list, start_idx = 0): # FIXME: Returns None
         integer value, if int(idx) is < start_idx,
         or if it exceeds the size of in_list.
         """
-        if not idx.isdigit():
-                return False
-        else:
-                return idx >= start_idx
+        if idx.isdigit() and (idx - start_idx) >= 0:
+                idx = int(idx)
+                if idx >= start_idx and idx < len(in_list):
+                        return True
+                else:
+                        return False
 
-def update_task(info_list, idx, priority_map, field_key, field_info, start_idx = 0): #FIXME: Returns None
+def update_task(info_list, idx, priority_map, field_key, field_info, start_idx = 0):
         """
         param: info_list - a list that contains task dictionaries
         param: idx (str) - a string that is expected to contain an integer
@@ -336,7 +340,7 @@ def update_task(info_list, idx, priority_map, field_key, field_info, start_idx =
         - is_valid_completion()
         """
 
-def delete_item(in_list, idx, start_idx = 0): # FIXME: Returns None
+def delete_item(in_list, idx, start_idx = 0):
         """
         param: in_list - a list from which to remove an item
         param: idx (str) - a string that is expected to

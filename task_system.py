@@ -94,6 +94,7 @@ while True:
         elif subopt == 'I':
             print_tasks(all_tasks, priority_scale, completed = 'no')
         # Pause before going back to the main menu
+    # ----------------------------------------------------------------
     # elif opt == 'A':
     #     continue_action = 'y'
     #     while continue_action == 'y':

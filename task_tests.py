@@ -3,36 +3,91 @@ from task_system import *
 
 # Assert statements (0.0/14.0)
 
-### Test all-cases for the print_main_menu(menu) function ###
-arg1 = the_menu
-result = print_main_menu(arg1)
-expected_result = None
-print(f"--> print_main_menu({arg1}) returned `{result}`\n")
-assert result == expected_result
+# ### Test all-cases for the print_main_menu(menu) function ###
+# arg1 = the_menu
+# result = print_main_menu(arg1)
+# expected_result = None
+# print(f"--> print_main_menu({arg1}) returned `{result}`\n")
+# assert result == expected_result
 
-### Test all-cases for the get_selection(action, suboptions, to_upper=True, go_back=False) function ###
-# Test action = 'L'
-arg1 = 'L'
-arg2 = list_menu
-result = get_selection(arg1, arg2)
-expected_result = 'List'
-print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
-assert result == expected_result
-# Test action = 'A'
-arg1 = 'A'
-arg2 = list_menu
-result = get_selection(arg1, arg2)
-expected_result = 'A'
-print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
-assert result == expected_result
-# Test action = 'C'
-arg1 = 'C'
-arg2 = list_menu
-result = get_selection(arg1, arg2)
-expected_result = 'C'
-print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
-assert result == expected_result
-
+# ### Test all-cases for the get_selection(action, suboptions, to_upper=True, go_back=False) function ###
+# # Test action = 'L'
+# arg1 = 'L'
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result = 'List'
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test action = 'A'
+# arg1 = 'A'
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result = 'Add'
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test action = 'U'
+# arg1 = 'U'
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result = 'Update'
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test action = 'D'
+# arg1 = 'D'
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result = 'Delete'
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test action = 'S'
+# arg1 = 'S'
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result = 'Save the data to file'
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test action = 'R'
+# arg1 = 'R'
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result = 'Restore data from file'
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test action = 'Q'
+# arg1 = 'Q'
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result = 'Quit this program'
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test action = empty string
+# arg1 = ''
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result ='What would you like to do?'
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test action = number
+# arg1 = '1'
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result = '1'
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test action = empty list
+# arg1 = []
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result = []
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
+# # Test action = empty dict
+# arg1 = {}
+# arg2 = list_menu
+# result = get_selection(arg1, arg2)
+# expected_result = {}
+# print(f"--> get_selection({arg1, arg2}) returned `{result}`\n")
+# assert result == expected_result
 
 # ### Test all-cases for the print_task(task, priority_map, name_only=False) function ###
 # # Test name_only = False
