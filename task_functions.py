@@ -78,14 +78,37 @@ is_valid_month = {
         }
 
 is_valid_day = {
-        "01": "Sunday",
-        "02": "Monday",
-        "03": "Tuesday",
-        "04": "Wednesday",
-        "05": "Thursday",
-        "06": "Friday",
-        "07": "Saturday",
-        "08": "Sunday"
+        "01": "1",
+        "02": "2",
+        "03": "3",
+        "04": "4",
+        "05": "5",
+        "06": "6",
+        "07": "7",
+        "08": "8",
+        "09": "9",
+        "10": "10",
+        "11": "11",
+        "12": "12",
+        "13": "13",
+        "14": "14",
+        "15": "15",
+        "16": "16",
+        "17": "17",
+        "18": "18",
+        "19": "19",
+        "20": "20",
+        "21": "21",
+        "22": "22",
+        "23": "23",
+        "24": "24",
+        "25": "25",
+        "26": "26",
+        "27": "27",
+        "28": "28",
+        "29": "29",
+        "30": "30",
+        "31": "31"
 }
 
 is_valid_year = {
@@ -107,9 +130,16 @@ is_valid_year = {
 def get_written_date(date_input):
         """
         Returns the date in the format:
-        YYYY-MM-DD
+        Month Day, Year
         """
-        month, day, year = date_input.split("/")
+        if date_input == "":
+                return ""
+        elif date_input is list:
+                month = is_valid_month[date_input[0]]
+                day = is_valid_day[date_input[1]]
+                year = date_input[2]
+        else:
+                month, day, year = date_input.split("/")
         return f"{month} {day}, {year}"
 
 def print_task(task, priority_map, name_only=False):
