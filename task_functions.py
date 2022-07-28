@@ -134,12 +134,14 @@ def get_written_date(date_input):
         """
         if date_input == "":
                 return ""
-        elif date_input is list:
+        elif type(date_input) == list:
                 month = is_valid_month[date_input[0]]
                 day = is_valid_day[date_input[1]]
                 year = date_input[2]
         else:
                 month, day, year = date_input.split("/")
+                month = is_valid_month[month]
+                day = is_valid_day[day]
         return f"{month} {day}, {year}"
 
 def print_task(task, priority_map, name_only=False):
