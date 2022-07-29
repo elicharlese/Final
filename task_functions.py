@@ -223,10 +223,12 @@ def print_tasks(task_list, priority_map, name_only=False,
                         print(f"{task}.", end=" ")
                 if completed == 'all': # if all tasks need to be displayed
                         print_task(task, priority_map, name_only)
-                elif completed == 'yes':
-                        print_task(task, priority_map, name_only)
+                elif completed == 'yes': # if only completed tasks need to be displayed
+                        if task['done'] == 'yes':
+                                print_task(task, priority_map, name_only)
                 else:
-                        print_task(task, priority_map, name_only)
+                        if task['done'] == 'no':
+                                print_task(task, priority_map, name_only)
 
 def get_new_task(task_list, priority_map, name_only=False,
                 show_idx=False, start_idx=0, completed="all"):
@@ -260,26 +262,24 @@ def get_new_task(task_list, priority_map, name_only=False,
         Helper functions:
         - print_task() to print individual tasks
         """
-        print("-"*42)
-        for task in task_list:  # go through all tasks in the list
-                if show_idx:  # if the index of the task needs to be displayed
-                        print(f"{...}.", end=" ")
-                if completed == "all":
-                        print_task(task, priority_map, name_only)
-                elif completed == "yes":
-                        print_task(task, priority_map, name_only)
-                else:
-                        print_task(task, priority_map, name_only)
+        # print("-"*42)
+        # for key in suboptions:  # go through all tasks in the list
+        # if show_idx:  # if the index of the task needs to be displayed
+        #         print(f"{...}.", end=" ")
+        # if completed == "all":
+        #         print_task(task, priority_map, name_only)
+        # elif subopt == completed:
+        #         print_task(task, priority_map, name_only)
 
 def is_valid_name(name):
         """
         param: name (str) - a string containing the task's name
         returns: True if the name is not empty, False otherwise
         """
-        if name != "":
-                return True
-        else:
-                return False
+        # if name != "":
+        #         return True
+        # else:
+        #         return False
 def  is_valid_priority(priority):
         """
         param: priority (int) - an integer representing the task's priority
