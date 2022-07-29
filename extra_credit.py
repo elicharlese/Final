@@ -1,5 +1,4 @@
 from task_functions import *
-from task_system import *
 
 list_menu = {
         "A": "all tasks",
@@ -9,7 +8,7 @@ list_menu = {
         "D": "incomplete tasks, sorted by deadline"
         }
 
-def print_sorted_tasks(task_list, name_only = False, show_idx = False, start_idx = 0,
+def print_sorted_tasks(task_list, priority_map, name_only = False, show_idx = False, start_idx = 0,
                 sortby = "duedate", order = "asc"):
         """
         param: task_list (list) - a list containing dictionaries with
@@ -33,5 +32,9 @@ def print_sorted_tasks(task_list, name_only = False, show_idx = False, start_idx
                 the priority from the lowest to the highest keys.
         returns: the new sorted list (the original task_list is unmodified)
         """
-        task_list = sorted(task_list, key = lambda x: x[sortby], reverse = (order == "desc"))
-        return task_list
+        if sortby == "duedate":
+                sorted_list = sorted(task_list, key = lambda x: x["duedate"])
+        elif sortby == "priority":
+                sorted_list = sorted(task_list, key = lambda x: x["priority"])
+        print_tasks(sorted_list, priority_map, name_only, show_idx)
+        return sorted_list

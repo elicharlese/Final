@@ -1,4 +1,5 @@
 from task_functions import *
+from extra_credit import print_sorted_tasks
 
 opt = None
 
@@ -12,29 +13,6 @@ while True:
     "R" : "Restore data from file",
     "Q" : "Quit this program"
     }
-    all_tasks = [
-        {
-            "name": "Call XYZ",
-            "info": "",
-            "priority": 3,
-            "duedate": '05/28/2022',
-            "done": 'yes'
-        },
-        {
-            "name": "Finish checkpoint 1 for CSW8",
-            "info": "Submit to Gradescope",
-            "priority": 5,
-            "duedate": '06/02/2022',
-            "done": 'no'
-        },
-        {
-            "name": "Finish checkpoint 2 for CSW8",
-            "info": "Implement the new functions",
-            "priority": 5,
-            "duedate": '06/05/2022',
-            "done": 'no'
-        }
-    ]
     all_tasks = [
         {
         "name": "Call XYZ",
@@ -61,7 +39,9 @@ while True:
     list_menu = {
         "A": "all tasks",
         "C": "completed tasks",
-        "I": "incomplete tasks"
+        "I": "incomplete tasks",
+        "P": "incomplete tasks, sorted by priority",
+        "D": "incomplete tasks, sorted by deadline"
     }
     priority_scale = {
         1: "Lowest",
@@ -93,71 +73,75 @@ while True:
             print_tasks(all_tasks, priority_scale, completed = 'yes')
         elif subopt == 'I':
             print_tasks(all_tasks, priority_scale, completed = 'no')
+        elif subopt == 'P':
+            print_sorted_tasks(all_tasks, priority_scale, sortby = 'priority')
+        elif subopt == 'D':
+            print_sorted_tasks(all_tasks, priority_scale, sortby = 'duedate')
         # Pause before going back to the main menu
     # ----------------------------------------------------------------
-    # elif opt == 'A':
-    #     continue_action = 'y'
-    #     while continue_action == 'y':
-    #         print("::: Enter each required field, separated by commas.")
-    #         print("::: name, info, priority, MM/DD/YYYY, is task done? (yes/no)")
-    #         ... = input("> ") # TODO: get and process the data into a list
-    #         ...
-    #         result = get_new_task(...) # TODO: attempt to create a new task
-    #         if type(result) == dict:
-    #             ... # TODO: add a new task to the list of tasks
-    #             print(f"Successfully added a new task!")
-    #             print_task(result, ...)
-    #         elif type(result) == int:
-    #             print(f"WARNING: invalid number of fields!")
-    #             print(f"You provided {result}, instead of the expected 5.\n")
-    #         else:
-    #             print(f"WARNING: invalid task field: {result}\n")
-    #         print("::: Would you like to add another task?", end=" ")
-    #         continue_action = input("Enter 'y' to continue.\n> ")
-    #         continue_action = continue_action.lower()
+    elif opt == 'A':
+        continue_action = 'y'
+        while continue_action == 'y':
+            print("::: Enter each required field, separated by commas.")
+            print("::: name, info, priority, MM/DD/YYYY, is task done? (yes/no)")
+            new_task_list = input("> ")
+            new_task_list = new_task_list.split(',')
+            result = get_new_task(new_task_list, priority_scale)
+            if type(result) == dict:
+                all_tasks.append(result)
+                print(f"Successfully added a new task!")
+                print_task(result, ...)
+            elif len(result) != 5:
+                print(f"WARNING: invalid number of fields!")
+                print(f"You provided {result}, instead of the expected 5.\n")
+            else:
+                print(f"WARNING: invalid task field: {result}\n")
+            print("::: Would you like to add another task?", end=" ")
+            continue_action = input("Enter 'y' to continue.\n> ")
+            continue_action = continue_action.lower()
     # ----------------------------------------------------------------
-    # elif opt == 'U':
-    #     continue_action = 'y'
-    #     while continue_action == 'y':
-    #         if ... == []: # TODO: check if there are any tasks to update
-    #             print("WARNING: There is nothing to update!")
-    #             break
-    #         print("::: Which task would you like to update?")
-    #         print_tasks(all_tasks, priority_scale, name_only = True, show_idx = True, start_idx = 1)
-    #         print("::: Enter the number corresponding to the task.")
-    #         user_option = input("> ")
-    #         if ...: # TODO: check if there are any tasks to update
-    #             ... # TODO: convert the index appropriately to account for the start_idx = 1
-    #             subopt = get_selection("update", all_tasks[...], to_upper = False, go_back = True)
-    #             if subopt == 'M': # if the user changed their mind
-    #                 break
-    #             print(f"::: Enter a new value for the field |{...}|") # TODO
-    #             field_info = input("> ")
-    #             result = update_task(all_tasks, user_option, priority_scale, subopt, field_info, start_idx = 1)
-    #             if type(result) == dict:
-    #                 print(f"Successfully updated the field |{...}|:")  # TODO
-    #                 print_task(result, ...)  # TODO
-    #             else: # update_task() returned an error
-    #                 print(f"WARNING: invalid information for the field |{...}|!")  # TODO
-    #                 print(f"The task was not updated.")
-    #         else: # is_valid_index() returned False
-    #             print(f"WARNING: |{...}| is an invalid task number!")  # TODO
-    #         print("::: Would you like to update another task?", end=" ")
-    #         continue_action = input("Enter 'y' to continue.\n> ")
-    #         continue_action = continue_action.lower()
+    elif opt == 'U':
+        continue_action = 'y'
+        while continue_action == 'y':
+            if all_tasks == []:
+                print("WARNING: There is nothing to update!")
+                break
+            print("::: Which task would you like to update?")
+            print_tasks(all_tasks, priority_scale, name_only = True, show_idx = True, start_idx = 1)
+            print("::: Enter the number corresponding to the task.")
+            user_option = input("> ")
+            if is_valid_index(user_option, all_tasks, start_idx=1):
+                idx = int(user_option) - 1
+                subopt = get_selection("update", all_tasks[idx], to_upper = False, go_back = True)
+                if subopt == 'M': # if the user changed their mind
+                    break
+                print(f"::: Enter a new value for the field |{subopt}|")
+                field_info = input("> ")
+                result = update_task(all_tasks, user_option, priority_scale, subopt, field_info, start_idx = 1)
+                if type(result) == dict:
+                    print(f"Successfully updated the field |{subopt}|:")
+                    print_task(result, priority_scale)
+                else: # update_task() returned an error
+                    print(f"WARNING: invalid information for the field |{subopt}|!")
+                    print(f"The task was not updated.")
+            else: # is_valid_index() returned False
+                print(f"WARNING: |{user_option}| is an invalid task number!")
+            print("::: Would you like to update another task?", end=" ")
+            continue_action = input("Enter 'y' to continue.\n> ")
+            continue_action = continue_action.lower()
     # ----------------------------------------------------------------
-    # elif opt == 'S':
-    #     continue_action = ...
-    #     while continue_action == 'y':
-    #         print("::: Enter the filename ending with '.csv'.")
-    #         filename = input("> ")
-    #         ... = save_tasks_to_csv(..., ...) # TODO: Call the function with appropriate inputs and capture the output
-    #         if ... == -1: # TODO
-    #             print(f"WARNING: |{...}| is an invalid file name!") # TODO
-    #             print("::: Would you like to try again?", end=" ")
-    #             continue_action = input("Enter 'y' to try again.\n> ")
-    #         else:
-    #             print(f"Successfully stored all the tasks to |{...}|")
+    elif opt == 'S':
+        continue_action = 'y'
+        while continue_action == 'y':
+            print("::: Enter the filename ending with '.csv'.")
+            filename = input("> ")
+            status = save_tasks_to_csv(all_tasks, filename) 
+            if status == -1: 
+                print(f"WARNING: |{filename}| is an invalid file name!")
+                print("::: Would you like to try again?", end=" ")
+                continue_action = input("Enter 'y' to try again.\n> ")
+            else:
+                print(f"Successfully stored all the tasks to |{filename}|")
     #--------------------------------------------------------------------------
     input("::: Press Enter to continue")
     continue

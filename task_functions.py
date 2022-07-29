@@ -62,8 +62,12 @@ def get_selection(action, suboptions, to_upper = True, go_back = False):
                         f"{action.lower()} |{suboptions[selection]}|.")
         return selection
 
-is_valid_month = {
-        "01": "January",
+def is_valid_month(month):
+        """
+        String
+        """
+        MONTHS = {
+        "01": "January",        
         "02": "February",
         "03": "March",
         "04": "April",
@@ -76,8 +80,16 @@ is_valid_month = {
         "11": "November",
         "12": "December"
         }
+        if month in MONTHS:
+                return True
+        else:
+                return False
 
-is_valid_day = {
+def is_valid_day(day):
+        """
+        String
+        """
+        DAYS = {
         "01": "1",
         "02": "2",
         "03": "3",
@@ -109,39 +121,86 @@ is_valid_day = {
         "29": "29",
         "30": "30",
         "31": "31"
-}
+        }
+        if day in DAYS:
+                return True
+        else:
+                return False
 
-is_valid_year = {
-        "2010": "2010",
-        "2011": "2011",
-        "2012": "2012",
-        "2013": "2013",
-        "2014": "2014",
-        "2015": "2015",
-        "2016": "2016",
-        "2017": "2017",
-        "2018": "2018",
-        "2019": "2019",
-        "2020": "2020",
-        "2021": "2021",
-        "2022": "2022"
-}
+def is_valid_year(year):
+        """
+        String
+        """
+        if len(year) != 4:
+                return False
+        try:
+                int(year)
+                return True
+        except ValueError:
+                return False
 
 def get_written_date(date_input):
         """
         Returns the date in the format:
         Month Day, Year
         """
+        MONTHS = {
+        "01": "January",        
+        "02": "February",
+        "03": "March",
+        "04": "April",
+        "05": "May",
+        "06": "June",
+        "07": "July",
+        "08": "August",
+        "09": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+        }
+        DAYS = {
+        "01": "1",
+        "02": "2",
+        "03": "3",
+        "04": "4",
+        "05": "5",
+        "06": "6",
+        "07": "7",
+        "08": "8",
+        "09": "9",
+        "10": "10",
+        "11": "11",
+        "12": "12",
+        "13": "13",
+        "14": "14",
+        "15": "15",
+        "16": "16",
+        "17": "17",
+        "18": "18",
+        "19": "19",
+        "20": "20",
+        "21": "21",
+        "22": "22",
+        "23": "23",
+        "24": "24",
+        "25": "25",
+        "26": "26",
+        "27": "27",
+        "28": "28",
+        "29": "29",
+        "30": "30",
+        "31": "31"
+        }
         if date_input == "":
                 return ""
         elif type(date_input) == list:
-                month = is_valid_month[date_input[0]]
-                day = is_valid_day[date_input[1]]
+                month = MONTHS[date_input[0]]
+                day = DAYS[date_input[1]]
                 year = date_input[2]
         else:
                 month, day, year = date_input.split("/")
-                month = is_valid_month[month]
-                day = is_valid_day[day]
+                month = MONTHS[month]
+                day = DAYS[day]
         return f"{month} {day}, {year}"
 
 def print_task(task, priority_map, name_only=False):
@@ -174,15 +233,15 @@ def print_task(task, priority_map, name_only=False):
                 print(f"{task['name']}")
         elif task['info'] != "":
                 print(f"{task['name']}")
-                print(f"* {task['info']}")
-                print(f"* Due: {get_written_date(task['duedate'])}", end=' ')
+                print(f"  * {task['info']}")
+                print(f"  * Due: {get_written_date(task['duedate'])}", end=' ')
                 print(f" (Priority: {priority_map[task['priority']]})")
-                print(f"* Completed? {task['done']}")
+                print(f"  * Completed? {task['done']}")
         else:
                 print(f"{task['name']}")
-                print(f"* Due: {get_written_date(task['duedate'])}", end=' ')
+                print(f"  * Due: {get_written_date(task['duedate'])}", end=' ')
                 print(f" (Priority: {priority_map[task['priority']]})")
-                print(f"* Completed? {task['done']}")
+                print(f"  * Completed? {task['done']}")
 
 
 def print_tasks(task_list, priority_map, name_only=False,
@@ -218,9 +277,9 @@ def print_tasks(task_list, priority_map, name_only=False,
         - print_task() to print individual tasks
         """
         print("-"*42)
-        for task in task_list: # go through all tasks in the list
+        for idx, task in enumerate(task_list): # go through all tasks in the list
                 if show_idx: # if the index of the task needs to be displayed
-                        print(f"{task}.", end=" ")
+                        print(f"{idx + start_idx}.", end=" ")
                 if completed == 'all': # if all tasks need to be displayed
                         print_task(task, priority_map, name_only)
                 elif completed == 'yes': # if only completed tasks need to be displayed
@@ -230,8 +289,7 @@ def print_tasks(task_list, priority_map, name_only=False,
                         if task['done'] == 'no':
                                 print_task(task, priority_map, name_only)
 
-def get_new_task(task_list, priority_map, name_only=False,
-                show_idx=False, start_idx=0, completed="all"):
+def get_new_task(task_list, priority_map):
         """
         param: task_list (list) - a list containing dictionaries with
                 the task data
@@ -239,53 +297,46 @@ def get_new_task(task_list, priority_map, name_only=False,
                 to have the integer keys that correspond to the "priority"
                 values stored in the task; the stored value is displayed
                 for the priority field, instead of the numeric value.
-        param: name_only (Boolean) - by default, set to False.
-                If True, then only the name of the task is printed.
-                Otherwise, displays the formatted task fields.
-                Passed as an argument into the helper function.
-        param: show_idx (Boolean) - by default, set to False.
-                If False, then the index of the task is not displayed.
-                Otherwise, displays the "{idx + start_idx}." before the
-                task name.
-        param: start_idx (int) - by default, set to 0;
-                an expected starting value for idx that
-                gets displayed for the first task, if show_idx is True.
-        param: completed (str) - by default, set to "all".
-                By default, prints all tasks, regardless of their
-                completion status ("done" field status).
-                Otherwise, it is set to one of the possible task's "done"
-                field's values in order to display only the tasks with
-                that completion status.
-
-        returns: None; only prints the task values from the task_list
-
-        Helper functions:
-        - print_task() to print individual tasks
         """
-        # print("-"*42)
-        # for key in suboptions:  # go through all tasks in the list
-        # if show_idx:  # if the index of the task needs to be displayed
-        #         print(f"{...}.", end=" ")
-        # if completed == "all":
-        #         print_task(task, priority_map, name_only)
-        # elif subopt == completed:
-        #         print_task(task, priority_map, name_only)
+        result = {}
+        for task in task_list: 
+                if not isinstance(task, str):
+                        return ('type', task)
+        if is_valid_name(task_list[0]):
+                result['name'] = task_list[0]
+        else:
+                return ('name', task_list[0])
+        result['info'] = task_list[1]
+        if is_valid_priority(task_list[2], priority_map):
+                result['priority'] = int(task_list[2])
+        else:
+                return ('priority', task_list[2])
+        if is_valid_date(task_list[3]):
+                result['duedate'] = task_list[3]
+        else:
+                return ('duedate', task_list[3])
+        if is_valid_completion(task_list[4]):
+                result['done'] = task_list[4]
+        else:
+                return ('done', task_list[4])
+        return result
 
 def is_valid_name(name):
         """
-        param: name (str) - a string containing the task's name
-        returns: True if the name is not empty, False otherwise
+        param: name (str) - an string that represents the name of the task.
+        returns a Boolean True if the text is between 3 and 25 characters ; False, otherwise
         """
-        # if name != "":
-        #         return True
-        # else:
-        #         return False
-def  is_valid_priority(priority):
+        if 3 <= len(name) <= 25:
+                return True
+        else:
+                return False
+
+def  is_valid_priority(priority, priority_map):
         """
         param: priority (int) - an integer representing the task's priority
         returns: True if the priority is between 1 and 5, False otherwise
         """
-        if priority in range(1, 6):
+        if priority.isdigit() and int(priority) in priority_map:
                 return True
         else:
                 return False
@@ -295,17 +346,24 @@ def is_valid_date(date):
         param: date (str) - a string containing the task's due date
         returns: True if the date is in the format YYYY-MM-DD, False otherwise
         """
-        if date.split("-")[0].isdigit() and date.split("-")[1].isdigit() and date.split("-")[2].isdigit():
-                return True
-        else:
+        date = date.split('/')
+        if len(date) != 3:
                 return False
+        if not is_valid_month(date[0]):
+                return False
+        if not is_valid_day(date[1]):
+                return False
+        if not is_valid_year(date[2]):
+                return False
+        else:
+                return True
 
 def is_valid_completion(completion):
         """
         param: completion (str) - a string containing the task's completion status
         returns: True if the completion status is either "done" or "not done", False otherwise
         """
-        if completion == "done" or completion == "not done":
+        if completion == "yes" or completion == "no":
                 return True
         else:
                 return False
@@ -330,12 +388,10 @@ def is_valid_index(idx, in_list, start_idx = 0):
         integer value, if int(idx) is < start_idx,
         or if it exceeds the size of in_list.
         """
-        if idx.isdigit() and (idx - start_idx) >= 0:
-                idx = int(idx)
-                if idx >= start_idx and idx < len(in_list):
-                        return True
-                else:
-                        return False
+        if idx.isdigit() and int(idx) >= start_idx and (int(idx) - start_idx) < len(in_list):
+                return True
+        else:
+                return False
 
 def update_task(info_list, idx, priority_map, field_key, field_info, start_idx = 0):
         """
@@ -377,6 +433,28 @@ def update_task(info_list, idx, priority_map, field_key, field_info, start_idx =
         - is_valid_date()
         - is_valid_completion()
         """
+        if info_list == []:
+                return 0
+        if not is_valid_index(idx, info_list, start_idx):
+                return -1
+        if field_key not in ['name', 'info', 'priority', 'duedate', 'done']:
+                return -2
+        if field_key == 'name' and is_valid_name(field_info):
+                info_list[int(idx) - start_idx][field_key] = field_info
+                return info_list[int(idx) - start_idx]
+        if field_key == 'info':
+                info_list[int(idx) - start_idx][field_key] = field_info
+                return info_list[int(idx) - start_idx]
+        if field_key == 'priority' and is_valid_priority(field_info, priority_map):
+                info_list[int(idx) - start_idx][field_key] = int(field_info)
+                return info_list[int(idx) - start_idx]
+        if field_key == 'duedate' and is_valid_date(field_info):
+                info_list[int(idx) - start_idx][field_key] = field_info
+                return info_list[int(idx) - start_idx]
+        if field_key == 'done' and is_valid_completion(field_info):
+                info_list[int(idx) - start_idx][field_key] = field_info
+                return info_list[int(idx) - start_idx]
+        return field_key
 
 def delete_item(in_list, idx, start_idx = 0):
         """
@@ -454,20 +532,23 @@ def load_tasks_from_csv(filename, in_list, priority_map):
         Helper functions:
         - get_new_task()
         """
-        # if filename[-4:] != '.csv':
-        #         return -1
-        # elif not os.path.isfile(filename):
-        #         return None
-        # else:
-        #         with open(filename, 'r') as f:
-        #                 reader = csv.reader(f)
-        #                 for row in reader:
-        #                         task = get_new_task(row, priority_map)
-        #                         if task:
-        #                                 in_list.append(task)
-        #                         else:
-        #                                 NEW.append(reader.line_num)
-        #         return NEW
+        import os
+        import csv
+        if filename[-4:] != '.csv':
+                return -1
+        elif not os.path.isfile(filename):
+                return None
+        else:
+                invalid_rows = []
+                with open(filename, 'r') as f:
+                        reader = csv.reader(f)
+                        for row in reader:
+                                task = get_new_task(row, priority_map)
+                                if task:
+                                        in_list.append(task)
+                                else:
+                                        invalid_rows.append(reader.line_num)
+                return invalid_rows
 
 def save_tasks_to_csv(tasks_list, filename):
         """
@@ -497,11 +578,12 @@ def save_tasks_to_csv(tasks_list, filename):
         -1 if the last 4 characters in `filename` are not '.csv'
         None if we are able to successfully write into `filename`
         """
-        # if filename[-4:] != '.csv':
-        #         return -1
-        # else:
-        #         with open(filename, 'w') as f:
-        #                 writer = csv.writer(f)
-        #                 for task in tasks_list:
-        #                         writer.writerow([task['name'], task['info'], task['priority'], task['duedate'], task['done']])
-        #         return None
+        import csv
+        if filename[-4:] != '.csv':
+                return -1
+        else:
+                with open(filename, 'w') as f:
+                        writer = csv.writer(f)
+                        for task in tasks_list:
+                                writer.writerow([task['name'], task['info'], task['priority'], task['duedate'], task['done']])
+                return None
